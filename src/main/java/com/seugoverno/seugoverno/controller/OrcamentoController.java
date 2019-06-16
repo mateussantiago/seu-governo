@@ -23,13 +23,15 @@ public class OrcamentoController {
     @RequestMapping(value = "/api/orcamentos", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity getOrcamentos(@RequestBody BodyDTO bodyDTO) {
 
-        List<OrcamentoDTO> orcamentoDTOS = orcamentoService.findOrcamentos(bodyDTO.getAnos(), bodyDTO.getMeses());
+        List<OrcamentoDTO> orcamentoDTOS = orcamentoService.findOrcamentos(bodyDTO.getAnos(), bodyDTO.getMeses(),
+                bodyDTO.getProgramaOrcamentario());
 
         return ResponseEntity.status(HttpStatus.OK).headers(new HttpHeaders()).body(orcamentoDTOS);
     }
 
     @RequestMapping(value = "/api/anos", method = RequestMethod.GET)
     public ResponseEntity<List<Integer>> getAnos() {
+
     	return new ResponseEntity<>(orcamentoService.findOpcoesAnos(), HttpStatus.OK);
     }
 
@@ -43,5 +45,11 @@ public class OrcamentoController {
     public ResponseEntity<List<String>> getProgramasOrcamentarios() {
 
         return ResponseEntity.status(HttpStatus.OK).headers(new HttpHeaders()).body(orcamentoService.findOpcoesProramaOrcamentario());
+    }
+
+    @RequestMapping(value = "/api/categorias", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseEntity<List<String>> getFuncoes() {
+
+        return ResponseEntity.status(HttpStatus.OK).headers(new HttpHeaders()).body(orcamentoService.findOpcoesCategorias());
     }
 }

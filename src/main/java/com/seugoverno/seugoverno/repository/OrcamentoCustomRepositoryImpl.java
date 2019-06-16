@@ -27,7 +27,7 @@ public class OrcamentoCustomRepositoryImpl implements OrcamentoCustomRepository 
      * @param meses lista contendo os meses passados
      * @return lista de orçamentos
      */
-    public List<OrcamentoDTO> findOrcamentos(List<Integer> anos, List<Integer> meses) {
+    public List<OrcamentoDTO> findOrcamentos(List<Integer> anos, List<Integer> meses, String programaOrcamentario) {
         StringBuilder sql = new StringBuilder();
         sql.append("select ano, mes, sum(valor_transferido) as orcamento_geral_mes from public.orcamento orc " +
                 "where 1=1 ");
@@ -35,7 +35,11 @@ public class OrcamentoCustomRepositoryImpl implements OrcamentoCustomRepository 
         sql.append("and orc.ano in (" + SQLUtil.stringsParametros(anos) + ") ");
 
         if (meses != null && !meses.isEmpty()) {
-            sql.append("and orc.mes in (" + SQLUtil.stringsParametros(meses) + ")" );
+            sql.append("and orc.mes in (" + SQLUtil.stringsParametros(meses) + ") " );
+        }
+
+        if (programaOrcamentario != null && !programaOrcamentario.isEmpty()) {
+            sql.append("and orc.programa_orcamentario like ('%" + programaOrcamentario + "%') ");
         }
 
         sql.append("group by ano, mes " +
