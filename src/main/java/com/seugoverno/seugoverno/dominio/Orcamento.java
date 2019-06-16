@@ -7,9 +7,9 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
-import org.springframework.data.annotation.Id;
 
 @Entity
 @Table(name = "orcamento")
@@ -20,9 +20,9 @@ public class Orcamento {
 	@Column(name = "id")
 	private int id;
 
-	private String mes;
+	private Integer mes;
 
-	private String ano;
+	private Integer ano;
 
 	private String acaoOrcamentaria;
 
@@ -53,19 +53,19 @@ public class Orcamento {
 		this.id = id;
 	}
 
-	public String getMes() {
+	public Integer getMes() {
 		return mes;
 	}
 
-	public void setMes(String mes) {
+	public void setMes(Integer mes) {
 		this.mes = mes;
 	}
 
-	public String getAno() {
+	public Integer getAno() {
 		return ano;
 	}
 
-	public void setAno(String ano) {
+	public void setAno(Integer ano) {
 		this.ano = ano;
 	}
 

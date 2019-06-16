@@ -37,4 +37,16 @@ public class OrcamentoService {
 
         }*/
     }
+    
+    public List<Integer> findOpcoesAnos(){
+    	return orcamentoRepository.findAllDistinctAno();
+    }
+
+    public List<Integer> findOpcoesMeses(){
+    	return orcamentoRepository.findAllDistinctMes();
+    }
+
+    public List<String> findOpcoesProramaOrcamentario(){
+    	return orcamentoRepository.findAllDistinctProgramaOrcamentario();
+    }
 }

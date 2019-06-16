@@ -2,17 +2,20 @@ package com.seugoverno.seugoverno.repository;
 
 import java.util.List;
 
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 import com.seugoverno.seugoverno.dominio.Orcamento;
-import com.seugoverno.seugoverno.repository.OrcamentoCustomRepository;
 
 public interface OrcamentoRepository extends CrudRepository<Orcamento, Integer>, OrcamentoCustomRepository {
 
-	List<String> findDistinctAno();
+	@Query(value = "SELECT DISTINCT(ano) FROM orcamento ORDER BY ano", nativeQuery = true)
+	List<Integer> findAllDistinctAno();
 
-	List<String> findDistinctMes();
+	@Query(value = "SELECT DISTINCT(mes) FROM orcamento ORDER BY mes", nativeQuery = true)
+	List<Integer> findAllDistinctMes();
 
-	List<String> findDistinctProgramaOrcamentario();
+	@Query(value = "SELECT DISTINCT(programa_orcamentario) FROM orcamento", nativeQuery = true)
+	List<String> findAllDistinctProgramaOrcamentario();
 	
 }
