@@ -48,10 +48,11 @@ public class OrcamentoCustomRepositoryImpl implements OrcamentoCustomRepository 
                 orcDTO.setAno((resultSet.getInt("ano")));
                 orcDTO.setMes(resultSet.getInt("mes"));
                 orcDTO.setOrcamento(resultSet.getBigDecimal("orcamento_geral_mes"));
+
                 return orcDTO;
             }
         });
 
         return orcamentoDTOList;
-}
+    }
 }

@@ -46,27 +46,22 @@ public class OrcamentoService {
 
         for (Integer ano : anos) {
             OrcamentoDTO orcDTO = new OrcamentoDTO();
-            HashMap<Integer, BigDecimal> mesOrcamento = new HashMap<Integer, BigDecimal>();
+            List<Integer> mesesByDTO = new ArrayList<Integer>();
+            List<BigDecimal> orcamentosByDTO= new ArrayList<BigDecimal>();
 
             List<OrcamentoDTO> orcamentoByAno = orcamentosDTO.stream()
                     .filter(orcamentoDTO -> orcamentoDTO.getAno().equals(ano))
                     .collect(Collectors.toList());
 
-            List<Integer> mesesAux = new ArrayList<Integer>();
-            List<BigDecimal> orcamentosAux = new ArrayList<BigDecimal>();
-            for (OrcamentoDTO orc : orcamentoByAno) {
-                Integer mes = orc.getMes();
-                BigDecimal orcamento = orc.getOrcamento();
-                mesOrcamento.put(mes, orcamento);
-                
-                mesesAux.add(mes);
-                orcamentosAux.add(orcamento);
+                for (OrcamentoDTO orc : orcamentoByAno) {
+                mesesByDTO.add(orc.getMes());
+                orcamentosByDTO.add(orc.getOrcamento());
             }
 
             orcDTO.setAno(ano);
-            orcDTO.setMesOrcamento(mesOrcamento);
-            orcDTO.setMeses(mesesAux);
-            orcDTO.setOrcamentos(orcamentosAux);
+            orcDTO.setMeses(mesesByDTO);
+            orcDTO.setOrcamentos(orcamentosByDTO);
+
             orcamentosTratados.add(orcDTO);
         }
 

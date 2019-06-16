@@ -166,3 +166,5 @@ cmake-build-*/
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 
+
+scripts/\.~lock\.programa_orcamentario\.csv#

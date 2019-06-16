@@ -12,11 +12,10 @@ public class OrcamentoDTO {
 	@JsonProperty("ano")
 	private Integer ano;
 
-	@JsonProperty("orcamento_por_mes")
-	private HashMap<Integer, BigDecimal> mesOrcamento;
-	
+	@JsonProperty("meses")
 	private List<Integer> meses;
-	
+
+	@JsonProperty("orcamentos")
 	private List<BigDecimal> orcamentos;
 
 	@JsonIgnore
@@ -31,30 +30,6 @@ public class OrcamentoDTO {
 
 	public void setAno(Integer ano) {
 		this.ano = ano;
-	}
-
-	public Integer getMes() {
-		return mes;
-	}
-
-	public void setMes(Integer mes) {
-		this.mes = mes;
-	}
-
-	public HashMap<Integer, BigDecimal> getMesOrcamento() {
-		return mesOrcamento;
-	}
-
-	public void setMesOrcamento(HashMap<Integer, BigDecimal> mesOrcamento) {
-		this.mesOrcamento = mesOrcamento;
-	}
-
-	public BigDecimal getOrcamento() {
-		return orcamento;
-	}
-
-	public void setOrcamento(BigDecimal orcamento) {
-		this.orcamento = orcamento;
 	}
 
 	public List<Integer> getMeses() {
@@ -72,5 +47,20 @@ public class OrcamentoDTO {
 	public void setOrcamentos(List<BigDecimal> orcamentos) {
 		this.orcamentos = orcamentos;
 	}
-	
+
+	public Integer getMes() {
+		return mes;
+	}
+
+	public void setMes(Integer mes) {
+		this.mes = mes;
+	}
+
+	public BigDecimal getOrcamento() {
+		return orcamento;
+	}
+
+	public void setOrcamento(BigDecimal orcamento) {
+		this.orcamento = orcamento;
+	}
 }
