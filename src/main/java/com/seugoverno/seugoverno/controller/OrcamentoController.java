@@ -21,10 +21,11 @@ public class OrcamentoController {
     private OrcamentoService orcamentoService;
 
     @RequestMapping(value = "/api/orcamentos", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity getOrcamentos(@RequestParam(value = "ano", required = false) Integer ano) {
+    public ResponseEntity getOrcamentos(@RequestParam(value = "ano", required = false) List<String> anos,
+                                        @RequestParam(value = "mes", required = false) List<String> meses){
 
-        List<OrcamentoDTO> orcamentoDTOS = orcamentoService.findOrcamentos(ano);
+        List<OrcamentoDTO> orcamentoDTOS = orcamentoService.findOrcamentos(anos, meses);
 
-        return ResponseEntity.status(HttpStatus.OK).headers(new HttpHeaders()).body(ano);
+        return ResponseEntity.status(HttpStatus.OK).headers(new HttpHeaders()).body(orcamentoDTOS);
     }
 }

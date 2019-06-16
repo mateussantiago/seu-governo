@@ -9,38 +9,38 @@ import java.util.HashMap;
 public class OrcamentoDTO {
 
     @JsonProperty("ano")
-    private Integer ano;
+    private String ano;
 
     @JsonProperty("orcamento-por-mes")
-    private HashMap<Integer, BigDecimal> mesOrcamento;
+    private HashMap<String, BigDecimal> mesOrcamento;
 
     @JsonIgnore
-    private Integer mes;
+    private String mes;
 
     @JsonIgnore
     private BigDecimal orcamento;
 
-    public Integer getAno() {
+    public String getAno() {
         return ano;
     }
 
-    public void setAno(Integer ano) {
+    public void setAno(String ano) {
         this.ano = ano;
     }
 
-    public HashMap<Integer, BigDecimal> getMesOrcamento() {
+    public HashMap<String, BigDecimal> getMesOrcamento() {
         return mesOrcamento;
     }
 
-    public void setMesOrcamento(HashMap<Integer, BigDecimal> mesOrcamento) {
+    public void setMesOrcamento(HashMap<String, BigDecimal> mesOrcamento) {
         this.mesOrcamento = mesOrcamento;
     }
 
-    public Integer getMes() {
+    public String getMes() {
         return mes;
     }
 
-    public void setMes(Integer mes) {
+    public void setMes(String mes) {
         this.mes = mes;
     }
 
