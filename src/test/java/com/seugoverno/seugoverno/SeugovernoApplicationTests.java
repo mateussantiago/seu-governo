@@ -1,4 +1,4 @@
-package br.seugoverno.seugoverno;
+package com.seugoverno.seugoverno;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
