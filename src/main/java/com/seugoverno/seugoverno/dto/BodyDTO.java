@@ -12,8 +12,11 @@ public class BodyDTO {
     @JsonProperty("meses")
     List<Integer> meses;
 
-    @JsonProperty("programa-orcamentario")
+    @JsonProperty("programa_orcamentario")
     private String programaOrcamentario;
+
+    @JsonProperty("categoria")
+    private String categoria;
 
     public List<Integer> getAnos() {
         return anos;
@@ -38,4 +41,13 @@ public class BodyDTO {
     public void setProgramaOrcamentario(String programaOrcamentario) {
         this.programaOrcamentario = programaOrcamentario;
     }
+
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
+    }
 }
+
