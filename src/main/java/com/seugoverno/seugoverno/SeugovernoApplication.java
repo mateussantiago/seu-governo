@@ -37,6 +37,7 @@ public class SeugovernoApplication {
 		listFiles(folder, files);
 
 		for (File file : files) {
+			System.out.println("-----> " + file.getPath());
 			List<List<String>> csvContent = readCsv(file.getPath());
 			if(!csvContent.isEmpty()) {
 				for(int i = 0 ; i < csvContent.size() ; i++) {
@@ -88,7 +89,7 @@ public class SeugovernoApplication {
 		//"17 - Saneamento"
 		//"08 - Assistência social"
 		//"12 - Educação"
-		
+
 		if(str.equals("17 - Saneamento")) {
 			return GrupoDeGasto.SANEAMENTO;
 		} 
@@ -100,7 +101,7 @@ public class SeugovernoApplication {
 		if(str.equals("12 - Educação")) {
 			return GrupoDeGasto.EDUCACAO;
 		}
-		
+
 		return null;
 	}
 
