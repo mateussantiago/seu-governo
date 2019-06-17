@@ -45,6 +45,20 @@ public class Orcamento {
 		super();
 	}
 
+	public Orcamento(Integer mes, Integer ano, String acaoOrcamentaria, String programaOrcamentario, String funcao,
+			String tipoFavorecido, String uf, String municipio, BigDecimal valorTransferido) {
+		super();
+		this.mes = mes;
+		this.ano = ano;
+		this.acaoOrcamentaria = acaoOrcamentaria;
+		this.programaOrcamentario = programaOrcamentario;
+		this.funcao = funcao;
+		this.tipoFavorecido = tipoFavorecido;
+		this.uf = uf;
+		this.municipio = municipio;
+		this.valorTransferido = valorTransferido;
+	}
+
 	public int getId() {
 		return id;
 	}
