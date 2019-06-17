@@ -24,13 +24,14 @@ public class OrcamentoService {
      * @param meses lista contendo os meses passados
      * @return lista com orçamentos
      */
-    public List<OrcamentoDTO> findOrcamentos(List<Integer> anos, List<Integer> meses, String programaOrcamentario) {
+    public List<OrcamentoDTO> findOrcamentos(List<Integer> anos, List<Integer> meses, String programaOrcamentario,
+                                             String categoria) {
         if (anos == null) {
             anos = new ArrayList<>();
             anos = orcamentoRepository.findAllDistinctAno();
         }
 
-        return getOrcamentos(anos, meses, programaOrcamentario);
+        return getOrcamentos(anos, meses, programaOrcamentario, categoria);
     }
 
     /**
@@ -40,8 +41,9 @@ public class OrcamentoService {
      * @param meses lista contendo os meses passados
      * @return lista com orçamentos
      */
-    private List<OrcamentoDTO> getOrcamentos(List<Integer> anos, List<Integer> meses, String programaOrcamentario){
-        List<OrcamentoDTO> orcamentosDTO = orcamentoRepository.findOrcamentos(anos, meses, programaOrcamentario);
+    private List<OrcamentoDTO> getOrcamentos(List<Integer> anos, List<Integer> meses, String programaOrcamentario,
+                                             String categoria){
+        List<OrcamentoDTO> orcamentosDTO = orcamentoRepository.findOrcamentos(anos, meses, programaOrcamentario, categoria);
         List<OrcamentoDTO> orcamentosTratados = new ArrayList<>();
 
         for (Integer ano : anos) {
