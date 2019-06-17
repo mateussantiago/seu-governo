@@ -1,5 +1,5 @@
 package com.seugoverno.seugoverno.dominio;
 
 public enum GrupoDeGasto {
-	EDUCACAO, SAUDE
+	EDUCACAO, SANEAMENTO, ASSISTENCIA_SOCIAL
 }

@@ -20,7 +20,7 @@ public class OrcamentoController {
     @Autowired
     private OrcamentoService orcamentoService;
 
-    @RequestMapping(value = "/api/orcamentos", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @RequestMapping(value = "/api/orcamentos", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity getOrcamentos(@RequestBody BodyDTO bodyDTO) {
 
         List<OrcamentoDTO> orcamentoDTOS = orcamentoService.findOrcamentos(bodyDTO.getAnos(), bodyDTO.getMeses(),

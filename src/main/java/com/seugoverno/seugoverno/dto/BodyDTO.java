@@ -17,8 +17,12 @@ public class BodyDTO {
 
     @JsonProperty("categoria")
     private String categoria;
+    
+    public BodyDTO() {
+		super();
+	}
 
-    public List<Integer> getAnos() {
+	public List<Integer> getAnos() {
         return anos;
     }
 
