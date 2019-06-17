@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import com.seugoverno.seugoverno.dto.OrcamentoDTO;
 import com.seugoverno.seugoverno.service.OrcamentoService;
 
-@CrossOrigin(origins = "http://localhost:8081", maxAge = 3600)
+@CrossOrigin(origins = {"http://localhost:8081", "http://10.7.160.36:8081"}, maxAge = 3600)
 @RestController
 public class OrcamentoController {
 
