@@ -17,6 +17,9 @@ public class BodyDTO {
 
     @JsonProperty("categoria")
     private String categoria;
+
+    @JsonProperty("uf")
+    private String uf;
     
     public BodyDTO() {
 		super();
@@ -53,5 +56,14 @@ public class BodyDTO {
     public void setCategoria(String categoria) {
         this.categoria = categoria;
     }
+
+	public String getUf() {
+		return uf;
+	}
+
+	public void setUf(String uf) {
+		this.uf = uf;
+	}
+    
 }
 

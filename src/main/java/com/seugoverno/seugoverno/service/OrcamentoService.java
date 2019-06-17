@@ -1,14 +1,17 @@
 package com.seugoverno.seugoverno.service;
 
-import com.seugoverno.seugoverno.dto.OrcamentoDTO;
-import com.seugoverno.seugoverno.repository.OrcamentoRepository;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.math.BigDecimal;
-import java.util.*;
-import java.util.stream.Collectors;
+import com.seugoverno.seugoverno.dto.BodyDTO;
+import com.seugoverno.seugoverno.dto.OrcamentoDTO;
+import com.seugoverno.seugoverno.repository.OrcamentoRepository;
 
 @Transactional
 @Service
@@ -24,14 +27,12 @@ public class OrcamentoService {
      * @param meses lista contendo os meses passados
      * @return lista com orçamentos
      */
-    public List<OrcamentoDTO> findOrcamentos(List<Integer> anos, List<Integer> meses, String programaOrcamentario,
-                                             String categoria) {
-        if (anos == null) {
-            anos = new ArrayList<>();
-            anos = orcamentoRepository.findAllDistinctAno();
+    public List<OrcamentoDTO> findOrcamentos(BodyDTO dto) {
+    	if (dto.getAnos() == null || dto.getAnos().isEmpty()) {
+            dto.setAnos(orcamentoRepository.findAllDistinctAno());
         }
 
-        return getOrcamentos(anos, meses, programaOrcamentario, categoria);
+        return getOrcamentos(dto);
     }
 
     /**
@@ -41,9 +42,15 @@ public class OrcamentoService {
      * @param meses lista contendo os meses passados
      * @return lista com orçamentos
      */
-    private List<OrcamentoDTO> getOrcamentos(List<Integer> anos, List<Integer> meses, String programaOrcamentario,
-                                             String categoria){
-        List<OrcamentoDTO> orcamentosDTO = orcamentoRepository.findOrcamentos(anos, meses, programaOrcamentario, categoria);
+    private List<OrcamentoDTO> getOrcamentos(BodyDTO dto){
+    	
+    	List<Integer> anos = dto.getAnos();
+    	List<Integer> meses = dto.getMeses();
+    	String programaOrcamentario = dto.getProgramaOrcamentario();
+        String categoria = dto.getCategoria();
+        String uf = dto.getUf();
+        
+        List<OrcamentoDTO> orcamentosDTO = orcamentoRepository.findOrcamentos(anos, meses, programaOrcamentario, categoria, uf);
         List<OrcamentoDTO> orcamentosTratados = new ArrayList<>();
 
         for (Integer ano : anos) {
@@ -84,5 +91,9 @@ public class OrcamentoService {
 
     public List<String> findOpcoesCategorias() {
         return orcamentoRepository.findAllDistinctCategorias();
+    }
+
+    public List<String> findOpcoesUfs() {
+        return orcamentoRepository.findAllDistinctUfs();
     }
 }

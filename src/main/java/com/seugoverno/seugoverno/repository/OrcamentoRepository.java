@@ -20,6 +20,9 @@ public interface OrcamentoRepository extends CrudRepository<Orcamento, Integer>,
     @Query(value = "SELECT DISTINCT(ano) FROM orcamento ORDER BY ano", nativeQuery = true)
 	List<Integer> findAllDistinctAno();
 
-    @Query(value = "SELECT DISTINCT (funcao) FROM orcamento", nativeQuery = true)
+    @Query(value = "SELECT DISTINCT (grupo) FROM orcamento", nativeQuery = true)
 	List<String> findAllDistinctCategorias();
+
+    @Query(value = "SELECT DISTINCT (uf) FROM orcamento", nativeQuery = true)
+	List<String> findAllDistinctUfs();
 }
