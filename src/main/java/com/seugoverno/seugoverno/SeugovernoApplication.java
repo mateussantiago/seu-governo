@@ -31,7 +31,7 @@ public class SeugovernoApplication {
 
 	@Bean
 	public void populate() throws FileNotFoundException, IOException {
-		String pathFolder = "/home/ramonsantos/dev/engsoft/workspace/seu-governo/scripts/csvs_tratados/";
+		String pathFolder = "/home/sig_saude/dev/engsoft/workspace/seu-governo/scripts/csvs_tratados/";
 		File folder = new File(pathFolder);
 		List<File> files = new ArrayList<File>();
 		listFiles(folder, files);
