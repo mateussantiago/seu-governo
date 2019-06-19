@@ -17,83 +17,91 @@ import com.seugoverno.seugoverno.repository.OrcamentoRepository;
 @Service
 public class OrcamentoService {
 
-    @Autowired
-    private OrcamentoRepository orcamentoRepository;
+	@Autowired
+	private OrcamentoRepository orcamentoRepository;
 
-    /**
-     * Verifica se a lista anos é nula. Sendo assim, busca por todos os anos disponíveis
-     * chamando o repository.
-     * @param anos lista contendo os anos passados
-     * @param meses lista contendo os meses passados
-     * @return lista com orçamentos
-     */
-    public List<OrcamentoDTO> findOrcamentos(BodyDTO dto) {
-    	if (dto.getAnos() == null || dto.getAnos().isEmpty()) {
-            dto.setAnos(orcamentoRepository.findAllDistinctAno());
-        }
+	/**
+	 * Verifica se a lista anos é nula. Sendo assim, busca por todos os anos
+	 * disponíveis chamando o repository.
+	 * 
+	 * @param anos  lista contendo os anos passados
+	 * @param meses lista contendo os meses passados
+	 * @return lista com orçamentos
+	 */
+	public List<OrcamentoDTO> findOrcamentos(BodyDTO dto) {
+		if (dto.getAnos() == null || dto.getAnos().isEmpty()) {
+			dto.setAnos(orcamentoRepository.findAllDistinctAno());
+		}
 
-        return getOrcamentos(dto);
-    }
+		return getOrcamentos(dto);
+	}
 
-    /**
-     * Busca pelos orçamentos chamando o repository e trata o resultado. Para resultar em
-     * um json mais limpo, o resultado da consulta no banco é agrupado por ano.
-     * @param anos lista contendo os anos passados
-     * @param meses lista contendo os meses passados
-     * @return lista com orçamentos
-     */
-    private List<OrcamentoDTO> getOrcamentos(BodyDTO dto){
-    	
-    	List<Integer> anos = dto.getAnos();
-    	List<Integer> meses = dto.getMeses();
-    	String programaOrcamentario = dto.getProgramaOrcamentario();
-        String categoria = dto.getCategoria();
-        String uf = dto.getUf();
-        
-        List<OrcamentoDTO> orcamentosDTO = orcamentoRepository.findOrcamentos(anos, meses, programaOrcamentario, categoria, uf);
-        List<OrcamentoDTO> orcamentosTratados = new ArrayList<>();
+	/**
+	 * Busca pelos orçamentos chamando o repository e trata o resultado. Para
+	 * resultar em um json mais limpo, o resultado da consulta no banco é agrupado
+	 * por ano.
+	 * 
+	 * @param anos  lista contendo os anos passados
+	 * @param meses lista contendo os meses passados
+	 * @return lista com orçamentos
+	 */
+	private List<OrcamentoDTO> getOrcamentos(BodyDTO dto) {
 
-        for (Integer ano : anos) {
-            OrcamentoDTO orcDTO = new OrcamentoDTO();
-            List<Integer> mesesByDTO = new ArrayList<Integer>();
-            List<BigDecimal> orcamentosByDTO= new ArrayList<BigDecimal>();
+		List<Integer> anos = dto.getAnos();
+		List<Integer> meses = dto.getMeses();
+		String programaOrcamentario = dto.getProgramaOrcamentario();
+		List<String> categorias = dto.getCategoria();
+		String uf = dto.getUf();
+		
+		List<OrcamentoDTO> orcamentosTratados = new ArrayList<>();
 
-            List<OrcamentoDTO> orcamentoByAno = orcamentosDTO.stream()
-                    .filter(orcamentoDTO -> orcamentoDTO.getAno().equals(ano))
-                    .collect(Collectors.toList());
+		for (String categoria : categorias) {
 
-                for (OrcamentoDTO orc : orcamentoByAno) {
-                mesesByDTO.add(orc.getMes());
-                orcamentosByDTO.add(orc.getOrcamento());
-            }
+			List<OrcamentoDTO> orcamentosDTO = orcamentoRepository.findOrcamentos(anos, meses, programaOrcamentario,
+					categoria, uf);
 
-            orcDTO.setAno(ano);
-            orcDTO.setMeses(mesesByDTO);
-            orcDTO.setOrcamentos(orcamentosByDTO);
+			for (Integer ano : anos) {
+				OrcamentoDTO orcDTO = new OrcamentoDTO();
+				List<Integer> mesesByDTO = new ArrayList<Integer>();
+				List<BigDecimal> orcamentosByDTO = new ArrayList<BigDecimal>();
 
-            orcamentosTratados.add(orcDTO);
-        }
+				List<OrcamentoDTO> orcamentoByAno = orcamentosDTO.stream()
+						.filter(orcamentoDTO -> orcamentoDTO.getAno().equals(ano)).collect(Collectors.toList());
 
-        return orcamentosTratados;
-    }
-    
-    public List<Integer> findOpcoesAnos(){
-    	return orcamentoRepository.findAllDistinctAno();
-    }
+				for (OrcamentoDTO orc : orcamentoByAno) {
+					mesesByDTO.add(orc.getMes());
+					orcamentosByDTO.add(orc.getOrcamento());
+				}
 
-    public List<Integer> findOpcoesMeses(){
-    	return orcamentoRepository.findAllDistinctMes();
-    }
+				orcDTO.setAno(ano);
+				orcDTO.setMeses(mesesByDTO);
+				orcDTO.setOrcamentos(orcamentosByDTO);
+				orcDTO.setCategoria(categoria);
+				orcamentosTratados.add(orcDTO);
+			}
 
-    public List<String> findOpcoesProramaOrcamentario() {
-    	return orcamentoRepository.findAllDistinctProgramaOrcamentario();
-    }
+		}
 
-    public List<String> findOpcoesCategorias() {
-        return orcamentoRepository.findAllDistinctCategorias();
-    }
+		return orcamentosTratados;
+	}
 
-    public List<String> findOpcoesUfs() {
-        return orcamentoRepository.findAllDistinctUfs();
-    }
+	public List<Integer> findOpcoesAnos() {
+		return orcamentoRepository.findAllDistinctAno();
+	}
+
+	public List<Integer> findOpcoesMeses() {
+		return orcamentoRepository.findAllDistinctMes();
+	}
+
+	public List<String> findOpcoesProramaOrcamentario() {
+		return orcamentoRepository.findAllDistinctProgramaOrcamentario();
+	}
+
+	public List<String> findOpcoesCategorias() {
+		return orcamentoRepository.findAllDistinctCategorias();
+	}
+
+	public List<String> findOpcoesUfs() {
+		return orcamentoRepository.findAllDistinctUfs();
+	}
 }

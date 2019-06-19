@@ -1,7 +1,6 @@
 package com.seugoverno.seugoverno.dto;
 
 import java.math.BigDecimal;
-import java.util.HashMap;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -23,6 +22,8 @@ public class OrcamentoDTO {
 
 	@JsonIgnore
 	private BigDecimal orcamento;
+	
+	private String categoria;
 
 	public Integer getAno() {
 		return ano;
@@ -63,4 +64,13 @@ public class OrcamentoDTO {
 	public void setOrcamento(BigDecimal orcamento) {
 		this.orcamento = orcamento;
 	}
+
+	public String getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(String categoria) {
+		this.categoria = categoria;
+	}
+	
 }

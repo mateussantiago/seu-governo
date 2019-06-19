@@ -6,56 +6,56 @@ import java.util.List;
 
 public class BodyDTO {
 
-    @JsonProperty("anos")
-    List<Integer> anos;
+	@JsonProperty("anos")
+	List<Integer> anos;
 
-    @JsonProperty("meses")
-    List<Integer> meses;
+	@JsonProperty("meses")
+	List<Integer> meses;
 
-    @JsonProperty("programa_orcamentario")
-    private String programaOrcamentario;
+	@JsonProperty("programa_orcamentario")
+	private String programaOrcamentario;
 
-    @JsonProperty("categoria")
-    private String categoria;
+	@JsonProperty("categoria")
+	private List<String> categoria;
 
-    @JsonProperty("uf")
-    private String uf;
-    
-    public BodyDTO() {
+	@JsonProperty("uf")
+	private String uf;
+
+	public BodyDTO() {
 		super();
 	}
 
 	public List<Integer> getAnos() {
-        return anos;
-    }
+		return anos;
+	}
 
-    public void setAnos(List<Integer> anos) {
-        this.anos = anos;
-    }
+	public void setAnos(List<Integer> anos) {
+		this.anos = anos;
+	}
 
-    public List<Integer> getMeses() {
-        return meses;
-    }
+	public List<Integer> getMeses() {
+		return meses;
+	}
 
-    public void setMeses(List<Integer> meses) {
-        this.meses = meses;
-    }
+	public void setMeses(List<Integer> meses) {
+		this.meses = meses;
+	}
 
-    public String getProgramaOrcamentario() {
-        return programaOrcamentario;
-    }
+	public String getProgramaOrcamentario() {
+		return programaOrcamentario;
+	}
 
-    public void setProgramaOrcamentario(String programaOrcamentario) {
-        this.programaOrcamentario = programaOrcamentario;
-    }
+	public void setProgramaOrcamentario(String programaOrcamentario) {
+		this.programaOrcamentario = programaOrcamentario;
+	}
 
-    public String getCategoria() {
-        return categoria;
-    }
+	public List<String> getCategoria() {
+		return categoria;
+	}
 
-    public void setCategoria(String categoria) {
-        this.categoria = categoria;
-    }
+	public void setCategoria(List<String> categoria) {
+		this.categoria = categoria;
+	}
 
 	public String getUf() {
 		return uf;
@@ -64,6 +64,5 @@ public class BodyDTO {
 	public void setUf(String uf) {
 		this.uf = uf;
 	}
-    
-}
 
+}
